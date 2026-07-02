@@ -152,13 +152,13 @@ Agar project tetap rapi dan tidak terjadi konflik, setiap anggota wajib mengikut
 Clone repository terlebih dahulu.
 
 ```bash
-git clone https://github.com/username/coffee-shop.git
+git clone https://github.com/ThuathaDe/PWLLaravel-kelompok4.git
 ```
 
 Masuk ke folder project.
 
 ```bash
-cd coffee-shop
+cd sistem_coffe-shop
 ```
 
 Install dependency.
