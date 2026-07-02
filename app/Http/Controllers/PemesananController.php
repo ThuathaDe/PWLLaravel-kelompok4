@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\DetailPesanan;
+use App\Models\Kategori;
+use App\Models\Meja;
+use App\Models\Pesanan;
+use App\Models\Produk;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class PemesananController extends Controller
+{
+    // Tampilkan katalog menu (diakses via QR Code di meja)
+    public function index(string $nomorMeja)
+    {
+        $meja = Meja::where('nomor_meja', $nomorMeja)->firstOrFail();
+        $kategoris = Kategori::with('produks')->get();
+
+        return view('pemesanan.index', compact('meja', 'kategoris'));
+    }
+
+    // Simpan pesanan baru
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'meja_id'            => 'required|exists:mejas,id',
+            'items'               => 'required|array|min:1',
+            'items.*.produk_id'   => 'required|exists:produks,id',
+            'items.*.jumlah'      => 'required|integer|min:1',
+        ]);
+
+        $pesanan = DB::transaction(function () use ($validated) {
+            $pesanan = Pesanan::create([
+                'meja_id' => $validated['meja_id'],
+                'status'  => 'pending',
+            ]);
+
+            $total = 0;
+
+            foreach ($validated['items'] as $item) {
+                $produk   = Produk::findOrFail($item['produk_id']);
+                $subtotal = $produk->harga * $item['jumlah'];
+
+                DetailPesanan::create([
+                    'pesanan_id' => $pesanan->id,
+                    'produk_id'  => $produk->id,
+                    'jumlah'     => $item['jumlah'],
+                    'subtotal'   => $subtotal,
+                ]);
+
+                $total += $subtotal;
+            }
+
+            $pesanan->update(['total_harga' => $total]);
+
+            return $pesanan;
+        });
+
+        return redirect()
+            ->route('pemesanan.selesai', $pesanan->id)
+            ->with('success', 'Pesanan berhasil dikirim!');
+    }
+
+    public function selesai(Pesanan $pesanan)
+    {
+        return view('pemesanan.selesai', compact('pesanan'));
+    }
+}
