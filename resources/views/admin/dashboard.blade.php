@@ -22,14 +22,14 @@
             }
 
             container.innerHTML = list.map(p => {
-                const items = p.items.map(i => <li>${i.nama_produk} x${i.jumlah}</li>).join('');
+                const items = p.items.map(i => `<li>${i.nama_produk} x${i.jumlah}</li>`).join('');
                 const totalFormatted = Number(p.total_harga).toLocaleString('id-ID');
 
                 let tombol = '';
                 if (p.status === 'pending') {
-                    tombol = <button onclick="ubahStatus(${p.id}, 'proses')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Proses</button>;
+                    tombol = `<button onclick="ubahStatus(${p.id}, 'proses')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Proses</button>`;
                 } else if (p.status === 'proses') {
-                    tombol = <button onclick="ubahStatus(${p.id}, 'selesai')" class="bg-green-500 text-white px-3 py-1 rounded text-sm">Tandai Selesai</button>;
+                    tombol = `<button onclick="ubahStatus(${p.id}, 'selesai')" class="bg-green-500 text-white px-3 py-1 rounded text-sm">Tandai Selesai</button>`;
                 }
 
                 return `
@@ -54,7 +54,7 @@
         }
 
         function ubahStatus(id, status) {
-            fetch(/admin/pesanan/${id}/status, {
+            fetch(`/admin/pesanan/${id}/status`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
