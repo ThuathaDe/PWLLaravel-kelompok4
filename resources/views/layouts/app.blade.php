@@ -12,6 +12,7 @@
     <nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
         <span class="font-bold text-lg">☕ Coffee Shop Self-Ordering</span>
         <div class="text-sm text-gray-500 flex items-center gap-4">
+            
             @yield('nav-info', '')
             @if (session('is_admin'))
                 <form action="{{ route('admin.logout') }}" method="POST">

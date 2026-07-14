@@ -6,8 +6,8 @@
 @section('content')
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">Kelola Produk</h1>
-        <a href="{{ route('admin.produk.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
-            + Tambah Produk
+        <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+            Kembali ke Dashboard
         </a>
     </div>
 

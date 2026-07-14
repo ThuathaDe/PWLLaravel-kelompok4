@@ -4,6 +4,11 @@
 @section('nav-info', 'Dashboard Admin')
 
 @section('content')
+    <a href="{{ route('admin.produk.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+            Tambah Produk
+    </a>
+    <br>
+    <br>
     <h1 class="text-2xl font-bold mb-6">Monitoring Pesanan Real-time</h1>
 
     <div id="daftar-pesanan" class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -71,4 +76,6 @@
         muatPesanan();
         setInterval(muatPesanan, 5000);
     </script>
+
+    
 @endsection

@@ -33,6 +33,11 @@ class KategoriSeeder extends Seeder
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ],
+            [
+                'nama_kategori' => 'Makanan',
+                'created_at'    => now(),
+                'updated_at'    => now(),
+            ],
         ]);
     }
 }
