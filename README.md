@@ -50,16 +50,14 @@ coffee-shop/
 
 # 👥 Pembagian Tugas
 
-| Anggota   | Fitur                            | Branch              |
-| --------- | -------------------------------- | ------------------- |
-| Ketua     | Setup Project, Integrasi, Review | `main`              |
-| Anggota 1 | Login & Authentication           | `feature-auth`      |
-| Anggota 2 | CRUD Menu                        | `feature-menu`      |
-| Anggota 3 | Sistem Order & Cart              | `feature-order`     |
-| Anggota 4 | Dashboard Admin                  | `feature-dashboard` |
-| Anggota 5 | Laporan & Penyempurnaan          | `feature-report`    |
+|        Anggota         | 
+|       ---------        | 
+| Tessar Febriansyah     | 
+| Muhammad Rasyiq Abiyyu | 
+| Damar Saputra          | 
 
-> **Catatan:** Nama branch dapat disesuaikan dengan nama anggota atau nama fitur yang dikerjakan.
+
+> **Catatan:** UJI COBA DAHULU SEBELUM PUSH PROJECT KE GITHUB.
 
 ---
 
@@ -114,8 +112,6 @@ resources/views/dashboard/
 Agar project tetap rapi dan tidak terjadi konflik, setiap anggota wajib mengikuti aturan berikut.
 
 ## Jangan Mengubah
-
-❌ Branch `main`
 
 ❌ Migration milik anggota lain
 
@@ -208,33 +204,28 @@ Hal ini bertujuan agar project lokal selalu menggunakan versi terbaru sebelum mu
 
 # 🌿 Alur Kerja GitHub
 
-## 1. Buat Branch Sendiri
+## 1. Push 
 
-Jangan pernah langsung bekerja di branch `main`.
 
 Contoh menggunakan nama fitur.
 
 ```bash
-git checkout -b feature-menu
+git push -u origin main
 ```
 
 atau menggunakan nama anggota.
 
-```bash
-git checkout -b rizky
-```
+
 
 ---
 
 ## 2. Kerjakan Fitur
 
-Kerjakan hanya fitur yang menjadi tanggung jawab masing-masing.
+Kerjakan fitur yang menjadi kekurangan project (bicarakan dengan teman project).
 
 Contoh:
-
 * Login
 * CRUD Menu
-* Keranjang
 * Checkout
 * Dashboard
 
@@ -256,76 +247,31 @@ Tambahkan seluruh file.
 git add .
 ```
 
+atau
+```bash
+git add <nama_file>
+```
+
 Commit perubahan.
 
 ```bash
 git commit -m "feat: menambahkan CRUD menu"
 ```
-
+atau
 ---
 
 ## 5. Push ke GitHub
 
 ```bash
-git push origin feature-menu
-```
-
-atau
-
-```bash
-git push origin rizky
-```
-
----
-
-## 6. Membuat Pull Request
-
-Setelah fitur selesai.
-
-1. Buka repository GitHub.
-2. Pilih branch yang telah di-push.
-3. Klik **Compare & Pull Request**.
-4. Berikan deskripsi perubahan.
-5. Tunggu proses review dari ketua kelompok.
-
----
-
-## 7. Merge
-
-Hanya ketua atau anggota yang ditunjuk yang melakukan merge ke branch `main`.
-
-```
-feature-menu
-        │
-        ▼
-Pull Request
-        │
-        ▼
-Code Review
-        │
-        ▼
-Merge
-        │
-        ▼
-main
+git push origin main
 ```
 
 ---
 
 # 📝 Penamaan Commit
 
-Gunakan format commit berikut agar riwayat perubahan mudah dipahami.
+Gunakan format commit yang jelas agar diketahui anggota lain sehingga perubahan mudah dipahami.
 
-```
-feat: menambahkan fitur login
-
-feat: membuat CRUD menu
-
-fix: memperbaiki validasi checkout
-
-style: memperbaiki tampilan dashboard
-
-refactor: merapikan kode controller
 ```
 
 ---
@@ -372,7 +318,7 @@ Pull Request
 Code Review
         │
         ▼
-Merge ke main
+Push Ke Main
 ```
 
 ---
@@ -380,12 +326,9 @@ Merge ke main
 # 📖 Aturan Kolaborasi
 
 * Selalu lakukan `git pull origin main` sebelum mulai bekerja.
-* Jangan melakukan `push` langsung ke branch `main`.
-* Kerjakan hanya fitur sesuai pembagian tugas.
 * Jangan menghapus atau mengubah kode milik anggota lain tanpa izin.
 * Pastikan fitur sudah diuji sebelum melakukan commit.
 * Gunakan pesan commit yang jelas dan sesuai perubahan.
-* Jika terjadi konflik (*merge conflict*), komunikasikan dengan ketua kelompok sebelum melakukan merge.
 
 ---
 
