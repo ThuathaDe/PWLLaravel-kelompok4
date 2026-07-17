@@ -4,15 +4,11 @@
 @section('nav-info', 'Dashboard Admin')
 
 @section('content')
-    <a href="{{ route('admin.produk.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
-            Tambah Produk
-    </a>
-    <br>
-    <br>
-    <h1 class="text-2xl font-bold mb-6">Monitoring Pesanan Real-time</h1>
+    <p class="font-mono-label text-xs mb-1" style="color: var(--mustard-dark);">PESANAN MASUK</p>
+    <h1 class="font-marker text-2xl mb-6">Monitoring Real-time</h1>
 
     <div id="daftar-pesanan" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <p class="text-gray-500">Memuat data pesanan...</p>
+        <p style="color: var(--ink-soft);">Memuat data pesanan...</p>
     </div>
 
     <script>
@@ -22,7 +18,7 @@
             const container = document.getElementById('daftar-pesanan');
 
             if (list.length === 0) {
-                container.innerHTML = '<p class="text-gray-500">Tidak ada pesanan aktif saat ini.</p>';
+                container.innerHTML = '<p style="color: var(--ink-soft);">Tidak ada pesanan aktif saat ini.</p>';
                 return;
             }
 
@@ -32,18 +28,24 @@
 
                 let tombol = '';
                 if (p.status === 'pending') {
-                    tombol = `<button onclick="ubahStatus(${p.id}, 'proses')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Proses</button>`;
+                    tombol = `<button onclick="ubahStatus(${p.id}, 'proses')" class="btn-mustard px-3 py-1 rounded text-sm font-medium">Proses</button>`;
                 } else if (p.status === 'proses') {
-                    tombol = `<button onclick="ubahStatus(${p.id}, 'selesai')" class="bg-green-500 text-white px-3 py-1 rounded text-sm">Tandai Selesai</button>`;
+                    tombol = `<button onclick="ubahStatus(${p.id}, 'selesai')" class="btn-clay px-3 py-1 rounded text-sm font-medium">Tandai Selesai</button>`;
                 }
 
                 return `
                     <div class="border rounded-lg p-4 shadow bg-white">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold">Meja ${p.nomor_meja}</span>
-                            <span class="text-sm px-2 py-1 rounded bg-yellow-200">${p.status}</span>
+                            <span class="font-semibold">Meja ${p.nomor_meja}</span>
+                            <span class="font-mono-label text-xs px-2 py-1 rounded" style="background: var(--paper); border: 1px solid var(--paper-line); color: var(--ink-soft);">${p.status.toUpperCase()}</span>
                         </div>
-                        <ul class="text-sm mb-3">${items}</ul>
+
+                        <div class="text-xs mb-2 flex justify-between" style="color: var(--ink-soft);">
+                            <span>Masuk ${p.dibuat_pukul}</span>
+                            <span style="color: var(--clay-dark); font-weight: 600;">Estimasi ${p.estimasi_selesai_pukul} (${p.estimasi_menit} mnt)</span>
+                        </div>
+
+                        <ul class="text-sm mb-3" style="color: var(--ink-soft);">${items}</ul>
                         <p class="font-semibold mb-2">Total: Rp${totalFormatted}</p>
                         ${tombol}
                     </div>
@@ -52,7 +54,7 @@
         }
 
         function muatPesanan() {
-            fetch("{{ route('admin.dashboard.data') }}")
+            fetch('{{ route("admin.dashboard.data") }}')
                 .then(res => res.json())
                 .then(data => renderPesanan(data))
                 .catch(err => console.error('Gagal memuat data:', err));
@@ -72,10 +74,7 @@
             .catch(err => console.error('Gagal ubah status:', err));
         }
 
-        // Muat pertama kali, lalu polling setiap 5 detik untuk efek real-time
         muatPesanan();
         setInterval(muatPesanan, 5000);
     </script>
-
-    
 @endsection
