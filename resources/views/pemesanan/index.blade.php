@@ -18,7 +18,7 @@
                         @if ($produk->foto_path)
                             <img src="{{ asset('storage/' . $produk->foto_path) }}" class="w-full h-32 object-cover rounded mb-2">
                         @endif
-                        <p class="font-semibold text-blue-500">{{ $produk->nama_produk }}</p>
+                        <p class="font-semibold">{{ $produk->nama_produk }}</p>
                         <p class="text-sm text-gray-500 mb-2">Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
 
                         <label class="text-sm">Jumlah:</label>

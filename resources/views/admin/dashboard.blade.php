@@ -33,16 +33,16 @@
 
                 let tombol = '';
                 if (p.status === 'pending') {
-                    tombol = `<button onclick="ubahStatus(${p.id}, 'proses')" class="btn-mustard px-3 py-1 rounded text-sm font-medium">Proses</button>`;
+                    tombol = `<button onclick="ubahStatus(${p.id}, 'proses')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Proses</button>`;
                 } else if (p.status === 'proses') {
-                    tombol = `<button onclick="ubahStatus(${p.id}, 'selesai')" class="btn-clay px-3 py-1 rounded text-sm font-medium">Tandai Selesai</button>`;
+                    tombol = `<button onclick="ubahStatus(${p.id}, 'selesai')" class="bg-green-500 text-white px-3 py-1 rounded text-sm">Tandai Selesai</button>`;
                 }
 
                 return `
                     <div class="border rounded-lg p-4 shadow bg-white">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold">Meja ${p.nomor_meja}</span>
-                            <span class="font-mono-label text-xs px-2 py-1 rounded" style="background: var(--paper); border: 1px solid var(--paper-line); color: var(--ink-soft);">${p.status.toUpperCase()}</span>
+                            <span class="font-bold">Meja ${p.nomor_meja}</span>
+                            <span class="text-sm px-2 py-1 rounded bg-yellow-200">${p.status}</span>
                         </div>
 
                         <div class="text-xs mb-2 flex justify-between" style="color: var(--ink-soft);">
