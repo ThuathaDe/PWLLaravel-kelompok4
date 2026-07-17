@@ -9,6 +9,7 @@
         <a href="{{ route('admin.produk.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
             Tambah Produk
         </a>
+        
     </div>
 
     <div class="bg-white rounded-lg shadow overflow-hidden">

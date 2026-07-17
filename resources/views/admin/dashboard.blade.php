@@ -7,6 +7,11 @@
     <p class="font-mono-label text-xs mb-1" style="color: var(--mustard-dark);">PESANAN MASUK</p>
     <h1 class="font-marker text-2xl mb-6">Monitoring Real-time</h1>
 
+    <a href="{{ route('admin.produk.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+            Lihat Daftar Produk 
+    </a>
+    <br><br>
+
     <div id="daftar-pesanan" class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <p style="color: var(--ink-soft);">Memuat data pesanan...</p>
     </div>
