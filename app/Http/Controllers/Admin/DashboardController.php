@@ -23,14 +23,15 @@ class DashboardController extends Controller
             ->get()
             ->map(function ($pesanan) {
                 return [
-                    'id'                    => $pesanan->id,
-                    'nomor_meja'            => $pesanan->meja->nomor_meja,
-                    'status'                => $pesanan->status,
-                    'total_harga'           => $pesanan->total_harga,
-                    'dibuat_pukul'          => $pesanan->created_at->format('H:i'),
-                    'estimasi_menit'        => $pesanan->estimasiMenit,
-                    'estimasi_selesai_pukul'=> $pesanan->waktuEstimasiSelesai->format('H:i'),
-                    'items'                 => $pesanan->detailPesanans->map(function ($detail) {
+                    'id'                     => $pesanan->id,
+                    'nomor_meja'             => $pesanan->meja->nomor_meja,
+                    'tanggal_pesan'          => $pesanan->tanggal_pesan,
+                    'status'                 => $pesanan->status,
+                    'total_harga'            => $pesanan->total_harga,
+                    'dibuat_pukul'           => $pesanan->created_at->format('H:i'),
+                    'estimasi_menit'         => $pesanan->estimasiMenit,
+                    'estimasi_selesai_pukul' => $pesanan->waktuEstimasiSelesai->format('H:i'),
+                    'items'                  => $pesanan->detailPesanans->map(function ($detail) {
                         return [
                             'nama_produk' => $detail->produk->nama_produk,
                             'jumlah'      => $detail->jumlah,
@@ -49,7 +50,9 @@ class DashboardController extends Controller
             'status' => 'required|in:pending,proses,selesai',
         ]);
 
-        $pesanan->update(['status' => $validated['status']]);
+        $pesanan->update([
+            'status' => $validated['status']
+        ]);
 
         return response()->json(['success' => true]);
     }

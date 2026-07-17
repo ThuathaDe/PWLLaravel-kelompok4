@@ -45,9 +45,12 @@
                             <span class="text-sm px-2 py-1 rounded bg-yellow-200">${p.status}</span>
                         </div>
 
-                        <div class="text-xs mb-2 flex justify-between" style="color: var(--ink-soft);">
-                            <span>Masuk ${p.dibuat_pukul}</span>
-                            <span style="color: var(--clay-dark); font-weight: 600;">Estimasi ${p.estimasi_selesai_pukul} (${p.estimasi_menit} mnt)</span>
+                        <div class="text-xs mb-2" style="color: var(--ink-soft);">
+                        <p>Tanggal Pesan : ${p.tanggal_pesan}</p>
+                        <p>Masuk : ${p.dibuat_pukul}</p>
+                        <p style="color: var(--clay-dark); font-weight:600;">
+                        Estimasi : ${p.estimasi_selesai_pukul} (${p.estimasi_menit} mnt)
+                        </p>
                         </div>
 
                         <ul class="text-sm mb-3" style="color: var(--ink-soft);">${items}</ul>

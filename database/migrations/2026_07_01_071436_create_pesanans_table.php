@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meja_id')->constrained('mejas')->cascadeOnDelete();
+            $table->date('tanggal_pesan');
             $table->enum('status', ['pending', 'proses', 'selesai'])->default('pending');
             $table->decimal('total_harga', 10, 2)->default(0);
             $table->timestamps();

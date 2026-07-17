@@ -25,16 +25,19 @@ class PemesananController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'meja_id'            => 'required|exists:mejas,id',
-            'items'               => 'required|array|min:1',
-            'items.*.produk_id'   => 'required|exists:produks,id',
-            'items.*.jumlah'      => 'required|integer|min:1',
+            'meja_id'           => 'required|exists:mejas,id',
+            'items'             => 'required|array|min:1',
+            'items.*.produk_id' => 'required|exists:produks,id',
+            'items.*.jumlah'    => 'required|integer|min:1',
         ]);
 
         $pesanan = DB::transaction(function () use ($validated) {
+
             $pesanan = Pesanan::create([
-                'meja_id' => $validated['meja_id'],
-                'status'  => 'pending',
+                'meja_id'        => $validated['meja_id'],
+                'tanggal_pesan'  => now(), // otomatis mengisi tanggal & jam saat pesan
+                'status'         => 'pending',
+                'total_harga'    => 0,
             ]);
 
             $total = 0;
@@ -53,7 +56,9 @@ class PemesananController extends Controller
                 $total += $subtotal;
             }
 
-            $pesanan->update(['total_harga' => $total]);
+            $pesanan->update([
+                'total_harga' => $total,
+            ]);
 
             return $pesanan;
         });

@@ -6,6 +6,7 @@
 @section('content')
     <div class="border rounded-lg p-4 shadow bg-white max-w-lg mx-auto text-center">
         <p class="font-mono-label text-xs mb-2" style="color: var(--mustard-dark);">TIKET #{{ $pesanan->id }}</p>
+        <p class="text-sm mb-2" style="color: var(--ink-soft);">Tanggal Pesan: {{ $pesanan->tanggal_pesan }}</p>
         <h1 class="font-marker text-2xl mb-2">Pesanan Terkirim!</h1>
         <p class="text-sm mb-4" style="color: var(--ink-soft);">Silakan tunggu, barista sedang menyiapkan pesanan Anda.</p>
 
