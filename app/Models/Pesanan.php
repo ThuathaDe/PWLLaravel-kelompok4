@@ -33,4 +33,22 @@ class Pesanan extends Model
         return $this->belongsToMany(Produk::class, 'detail_pesanans')
                      ->withPivot('jumlah', 'subtotal');
     }
+
+    // Total jumlah item (dijumlah dari semua baris DetailPesanan)
+    public function getTotalItemAttribute(): int
+    {
+        return $this->detailPesanans->sum('jumlah');
+    }
+
+    // Estimasi lama pengerjaan dalam menit: 5 menit dasar + 2 menit per item
+    public function getEstimasiMenitAttribute(): int
+    {
+        return 5 + ($this->totalItem * 2);
+    }
+
+    // Jam perkiraan pesanan selesai (waktu pesanan dibuat + estimasi menit)
+    public function getWaktuEstimasiSelesaiAttribute()
+    {
+        return $this->created_at->addMinutes($this->estimasiMenit);
+    }
 }
