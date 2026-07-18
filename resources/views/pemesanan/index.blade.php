@@ -21,6 +21,7 @@
                         @endif
                         <p class="font-semibold">{{ $produk->nama_produk }}</p>
                         <p class="text-sm text-gray-500 mb-2">Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                        <p class="text-sm text-gray-500 mb-2">{{ $produk->deskripsi }}</p>
                         <label class="text-sm">Jumlah:</label>
                         <div class="flex items-center gap-2 mt-1">
 

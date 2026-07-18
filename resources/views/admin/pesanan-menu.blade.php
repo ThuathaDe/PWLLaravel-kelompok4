@@ -4,8 +4,9 @@
 @section('nav-info', 'Buat Pesanan — Meja ' . $meja->nomor_meja)
 
 @section('content')
-    <a href="{{ route('admin.pesanan.buat') }}" class="link-ink text-sm">← Pilih meja lain</a>
+    <a href="{{ route('admin.pesanan.buat') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold text-sm">← Pilih meja lain</a>
 
+    
     <p class="font-mono-label text-xs mt-4 mb-1" style="color: var(--mustard-dark);">MEJA {{ $meja->nomor_meja }}</p>
     <h1 class="font-marker text-2xl mb-6">Buat Pesanan</h1>
 
@@ -24,6 +25,7 @@
                         @endif
                         <p class="font-semibold">{{ $produk->nama_produk }}</p>
                         <p class="text-sm mb-2" style="color: var(--ink-soft);">Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                        <p class="text-sm mb-2" style="color: var(--ink-soft);">{{ $produk->deskripsi }}</p>
 
                         <label class="text-sm">Jumlah:</label>
                         <div class="flex items-center gap-2 mt-1">
@@ -45,7 +47,7 @@
             </div>
         @endforeach
 
-        <button type="submit" class="mt-6 btn-mustard px-6 py-3 rounded font-semibold">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold text-sm">
             Simpan Pesanan
         </button>
     </form>

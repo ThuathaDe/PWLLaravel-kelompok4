@@ -17,6 +17,9 @@
         <a href="{{ route('admin.produk.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold text-sm">
             Lihat Daftar Produk
         </a>
+        <a href="{{ route('admin.riwayat') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded font-semibold text-sm">
+            Riwayat Pesanan
+        </a>
     </div>
 </div>
 

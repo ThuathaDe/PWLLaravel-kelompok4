@@ -80,4 +80,21 @@ class DashboardController extends Controller
 
         return view('admin.pesanan-menu', compact('meja', 'kategoris'));
     }
+    
+    // Riwayat pesanan yang sudah selesai dilayani, untuk pembukuan
+    public function riwayat(\Illuminate\Http\Request $request)
+    {
+        $tanggal = $request->query('tanggal', now()->format('Y-m-d'));
+
+        $pesanans = \App\Models\Pesanan::with(['meja', 'detailPesanans.produk'])
+            ->where('status', 'selesai')
+            ->whereDate('updated_at', $tanggal)
+            ->latest('updated_at')
+            ->get();
+
+        $totalPendapatan = $pesanans->sum('total_harga');
+        $totalPesanan = $pesanans->count();
+
+        return view('admin.riwayat', compact('pesanans', 'tanggal', 'totalPendapatan', 'totalPesanan'));
+    }
 }
