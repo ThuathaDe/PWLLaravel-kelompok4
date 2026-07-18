@@ -56,4 +56,19 @@ class DashboardController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    // Tampilkan daftar meja untuk admin, supaya admin bisa buatkan pesanan langsung
+    // Tampilkan daftar meja untuk admin, supaya admin bisa buatkan pesanan langsung
+    public function buatPesanan()
+    {
+        $mejas = \App\Models\Meja::withCount([
+                'pesanans as pesanan_aktif_count' => function ($query) {
+                    $query->whereIn('status', ['pending', 'proses']);
+                }
+            ])
+            ->orderBy('nomor_meja')
+            ->get();
+
+        return view('admin.pilih-meja', compact('mejas'));
+    }
 }
