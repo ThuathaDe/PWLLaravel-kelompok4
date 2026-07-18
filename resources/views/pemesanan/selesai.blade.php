@@ -30,8 +30,17 @@
 
         <p class="font-semibold text-lg">Total: Rp{{ number_format($pesanan->total_harga, 0, ',', '.') }}</p>
         <p class="font-mono-label text-xs mt-2" style="color: var(--ink-soft);">STATUS: {{ strtoupper($pesanan->status) }}</p>
-    </div>
 
+        <div class="mt-5">
+            <a
+                href="{{ route('pemesanan.index', $pesanan->meja->nomor_meja) }}"
+                class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-ink text-paper font-semibold hover:opacity-90 transition"
+            >
+                Kembali ke Pemesanan
+            </a>
+        </div>
+    </div>
+    
     <script>
         // Waktu target estimasi selesai, dikirim dari server (format ISO supaya akurat di semua timezone browser)
         const waktuTarget = new Date("{{ $pesanan->waktuEstimasiSelesai->toIso8601String() }}").getTime();

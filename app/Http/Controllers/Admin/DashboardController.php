@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pesanan;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,11 +18,16 @@ class DashboardController extends Controller
     // Endpoint JSON yang dipanggil berulang oleh JavaScript (polling) untuk data real-time
     public function data()
     {
-        $pesanans = Pesanan::with(['meja', 'detailPesanans.produk'])
+        $pesanans = Pesanan::with(['meja', 'detailPesanans.produk', 'pembayaran'])
             ->whereIn('status', ['pending', 'proses'])
             ->latest()
             ->get()
             ->map(function ($pesanan) {
+                
+                // Normalisasi string agar seragam dibaca JavaScript
+                $rawStatus = optional($pesanan->pembayaran)->status_pembayaran;
+                $statusPembayaran = $rawStatus ? strtolower(trim($rawStatus)) : 'unpaid';
+
                 return [
                     'id'                     => $pesanan->id,
                     'nomor_meja'             => $pesanan->meja->nomor_meja,
@@ -31,6 +37,9 @@ class DashboardController extends Controller
                     'dibuat_pukul'           => $pesanan->created_at->format('H:i'),
                     'estimasi_menit'         => $pesanan->estimasiMenit,
                     'estimasi_selesai_pukul' => $pesanan->waktuEstimasiSelesai->format('H:i'),
+                    'status_pembayaran'      => $statusPembayaran,
+                    'tanggal_bayar'          => optional($pesanan->pembayaran)->tanggal_bayar ? \Carbon\Carbon::parse(optional($pesanan->pembayaran)->tanggal_bayar)->format('Y-m-d H:i') : null,
+                    'uang_kembalian'         => optional($pesanan->pembayaran)->uang_kembalian,
                     'items'                  => $pesanan->detailPesanans->map(function ($detail) {
                         return [
                             'nama_produk' => $detail->produk->nama_produk,
@@ -57,8 +66,44 @@ class DashboardController extends Controller
         return response()->json(['success' => true]);
     }
 
-    // Tampilkan daftar meja untuk admin, supaya admin bisa buatkan pesanan langsung
-    // Tampilkan daftar meja untuk admin, supaya admin bisa buatkan pesanan langsung
+    public function bayar(Request $request, Pesanan $pesanan)
+    {
+        // Tetap dipertahankan untuk backup AJAX lama jika diperlukan
+        $validated = $request->validate([
+            'metode' => 'required|string|max:50',
+            'uang_dibayar' => 'required|numeric|min:0',
+        ]);
+
+        $total = (float) $pesanan->total_harga;
+        $uangDibayar = (float) $validated['uang_dibayar'];
+
+        if ($uangDibayar < $total) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Uang dibayar kurang dari total harga.'
+            ], 422);
+        }
+
+        $uangKembalian = $uangDibayar - $total;
+
+        $pesanan->pembayaran()->updateOrCreate(
+            [],
+            [
+                'metode' => $validated['metode'],
+                'jumlah' => $total,
+                'uang_dibayar' => $uangDibayar,
+                'uang_kembalian' => $uangKembalian,
+                'tanggal_bayar' => now(),
+                'status_pembayaran' => 'paid',
+            ]
+        );
+
+        return response()->json([
+            'success' => true,
+            'uang_kembalian' => $uangKembalian,
+        ]);
+    }
+
     public function buatPesanan()
     {
         $mejas = \App\Models\Meja::withCount([

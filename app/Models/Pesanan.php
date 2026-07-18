@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Pembayaran;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,6 +35,11 @@ class Pesanan extends Model
     {
         return $this->belongsToMany(Produk::class, 'detail_pesanans')
                      ->withPivot('jumlah', 'subtotal');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class);
     }
 
     // Total jumlah item (dijumlah dari semua baris DetailPesanan)
