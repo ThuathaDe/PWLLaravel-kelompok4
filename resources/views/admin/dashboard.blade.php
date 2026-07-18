@@ -50,7 +50,7 @@
             let tombolBayar = '';
             if (p.status_pembayaran !== 'paid') {
                 tombolBayar = `
-                    <a href="/admin/pesanan/${p.id}/bayar" class="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded text-sm font-semibold inline-block text-center text-white">
+                    <a href="/admin/pesanan/${p.id}/pembayaran" class="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded text-sm font-semibold inline-block text-center text-white">
                         Bayar Langsung
                     </a>
                 `;
