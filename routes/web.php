@@ -39,5 +39,7 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/pesanan/{pesanan}/status', [DashboardController::class, 'ubahStatus'])->name('pesanan.ubahStatus');
     
     Route::get('/pesanan/buat', [DashboardController::class, 'buatPesanan'])->name('pesanan.buat');
+
+    Route::get('/pesanan/menu/{nomorMeja}', [DashboardController::class, 'menuMeja'])->name('pesanan.menu');
 });
 

@@ -71,4 +71,13 @@ class DashboardController extends Controller
 
         return view('admin.pilih-meja', compact('mejas'));
     }
+
+    // Tampilkan menu untuk 1 meja tertentu, versi tampilan admin (bukan tampilan pelanggan)
+    public function menuMeja(string $nomorMeja)
+    {
+        $meja = \App\Models\Meja::where('nomor_meja', $nomorMeja)->firstOrFail();
+        $kategoris = \App\Models\Kategori::with('produks')->get();
+
+        return view('admin.pesanan-menu', compact('meja', 'kategoris'));
+    }
 }

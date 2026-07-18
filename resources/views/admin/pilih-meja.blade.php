@@ -16,7 +16,7 @@
                     <div class="font-mono-label text-xs mt-1" style="color: var(--clay-dark);">TERISI</div>
                 </div>
             @else
-                <a href="{{ route('pemesanan.index', $meja->nomor_meja) }}"
+                <a href="{{ route('admin.pesanan.menu', $meja->nomor_meja) }}"
                    class="bg-blue-500 text-white px-4 py-2 rounded">
                     Meja {{ $meja->nomor_meja }}
                     <div class="font-mono-label text-xs mt-1" style="color: #ffff;">KOSONG</div>
