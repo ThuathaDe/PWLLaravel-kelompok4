@@ -4,12 +4,23 @@
 @section('nav-info', 'Dashboard Admin')
 
 @section('content')
-    <p class="font-mono-label text-xs mb-1" style="color: var(--mustard-dark);">PESANAN MASUK</p>
-    <h1 class="font-marker text-2xl mb-6">Monitoring Real-time</h1>
+    <div class="flex justify-between items-center mb-6">
+    <div>
+        <p class="font-mono-label text-xs mb-1" style="color: var(--mustard-dark);">PESANAN MASUK</p>
+        <h1 class="font-marker text-2xl">Monitoring Real-time</h1>
+    </div>
 
-    <a href="{{ route('admin.produk.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
-            Lihat Daftar Produk 
-    </a>
+    <div class="flex items-center gap-3">
+        <a href="{{ route('admin.pesanan.buat') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold text-sm">
+            + Buat Pesanan
+        </a>
+        <a href="{{ route('admin.produk.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-semibold text-sm">
+            Lihat Daftar Produk
+        </a>
+    </div>
+</div>
+
+    
     <br><br>
     
     <div id="daftar-pesanan" class="grid grid-cols-1 md:grid-cols-3 gap-4">

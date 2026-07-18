@@ -37,5 +37,7 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('dashboard.data');
     Route::post('/pesanan/{pesanan}/status', [DashboardController::class, 'ubahStatus'])->name('pesanan.ubahStatus');
+    
+    Route::get('/pesanan/buat', [DashboardController::class, 'buatPesanan'])->name('pesanan.buat');
 });
 
