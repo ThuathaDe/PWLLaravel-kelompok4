@@ -27,26 +27,26 @@
                                     class="qty-minus"
                                     data-produk-id="{{ $produk->id }}"
                                     aria-label="Kurangi jumlah"
-                                    style="border:1px solid #d1d5db;border-radius:6px;padding:6px 10px;background:#fff;">
+                                    style="border:1px solid #d1d5db;border-radius:6px;padding:3px 10px;background:#fff;">
                                 -
                             </button>
 
 
                             <input type="number"
-                                   min="0"
-                                   value="0"
-                                   inputmode="numeric"
-                                   pattern="[0-9]*"
-                                   name="items[{{ $produk->id }}][jumlah]"
-                                   class="qty-input w-20 border rounded px-2 py-1 text-center"
-                                   data-produk-id="{{ $produk->id }}">
+                                min="0"
+                                value="0"
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                name="items[{{ $produk->id }}][jumlah]"
+                                class="qty-input flex-1 border px-2 py-1 text-center"
+                                data-produk-id="{{ $produk->id }}">
 
 
                             <button type="button"
                                     class="qty-plus"
                                     data-produk-id="{{ $produk->id }}"
                                     aria-label="Tambah jumlah"
-                                    style="border:1px solid #d1d5db;border-radius:6px;padding:6px 10px;background:#fff;">
+                                    style="border:1px solid #d1d5db;border-radius:6px;padding:3px 10px;background:#fff;">
                                 +
                             </button>
                         </div>
