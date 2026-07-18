@@ -33,6 +33,7 @@ class PemesananController extends Controller
 
         $pesanan = DB::transaction(function () use ($validated) {
 
+
             $pesanan = Pesanan::create([
                 'meja_id'        => $validated['meja_id'],
                 'tanggal_pesan'  => now(), // otomatis mengisi tanggal & jam saat pesan
@@ -43,13 +44,17 @@ class PemesananController extends Controller
             $total = 0;
 
             foreach ($validated['items'] as $item) {
-                $produk   = Produk::findOrFail($item['produk_id']);
-                $subtotal = $produk->harga * $item['jumlah'];
+                $produkId = $item['produk_id'];
+                $jumlah   = $item['jumlah'];
+
+                $produk   = Produk::findOrFail($produkId);
+
+                $subtotal = $produk->harga * $jumlah;
 
                 DetailPesanan::create([
                     'pesanan_id' => $pesanan->id,
                     'produk_id'  => $produk->id,
-                    'jumlah'     => $item['jumlah'],
+                    'jumlah'     => $jumlah,
                     'subtotal'   => $subtotal,
                 ]);
 

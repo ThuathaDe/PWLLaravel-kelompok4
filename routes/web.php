@@ -32,7 +32,10 @@ Route::get('/pesan/selesai/{pesanan}', [PemesananController::class, 'selesai'])-
 // ================= Sisi Admin (WAJIB login) =================
 Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('produk', ProdukController::class);
+
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/data', [DashboardController::class, 'data'])->name('dashboard.data');
     Route::post('/pesanan/{pesanan}/status', [DashboardController::class, 'ubahStatus'])->name('pesanan.ubahStatus');
 });
+
