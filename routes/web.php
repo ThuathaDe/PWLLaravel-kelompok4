@@ -47,8 +47,9 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/pesanan/{pesanan}/status', [DashboardController::class, 'ubahStatus'])->name('pesanan.ubahStatus');
     
     // --------------------------------------------------------------------------
-    // BARIS DI BAWAH INI ADALAH YANG HILANG DAN SUDAH DIMASUKKAN KEMBALI:
+    // FIX ERROR: Menambahkan rute menu untuk pembuatan pesanan admin yang hilang
     // --------------------------------------------------------------------------
+    Route::get('/pesanan/buat/{nomorMeja}/menu', [DashboardController::class, 'menuMeja'])->name('pesanan.menu');
 
     // Halaman Form Fitur Edit Pesanan (PesananAdminController)
     Route::get('/pesanan/{pesanan}/edit', [PesananAdminController::class, 'edit'])->name('pesanan.edit');
