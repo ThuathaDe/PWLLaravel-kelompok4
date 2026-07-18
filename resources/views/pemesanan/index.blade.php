@@ -16,7 +16,8 @@
                 @foreach ($kategori->produks as $produk)
                     <div class="bg-white rounded-lg shadow p-4">
                         @if ($produk->foto_path)
-                            <img src="{{ asset('storage/' . $produk->foto_path) }}" class="w-full h-32 object-cover rounded mb-2">
+                            <img src="{{ asset('storage/' . $produk->foto_path) }}"
+                                    style="width: 100%; height: 128px; object-fit: cover; object-position: center; border-radius: 6px; display: block; margin-bottom: 8px;">
                         @endif
                         <p class="font-semibold">{{ $produk->nama_produk }}</p>
                         <p class="text-sm text-gray-500 mb-2">Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>

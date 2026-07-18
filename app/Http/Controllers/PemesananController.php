@@ -68,10 +68,16 @@ class PemesananController extends Controller
             return $pesanan;
         });
 
+        if (session('is_admin')) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('success', 'Pesanan untuk Meja ' . $pesanan->meja->nomor_meja . ' berhasil dibuat.');
+        }
+
         return redirect()
             ->route('pemesanan.selesai', $pesanan->id)
             ->with('success', 'Pesanan berhasil dikirim!');
-    }
+            }
 
     public function selesai(Pesanan $pesanan)
     {

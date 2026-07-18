@@ -44,14 +44,7 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     
     // Aksi Cepat Perubahan Status Pesanan dari Dashboard (AJAX Fetch)
     Route::post('/pesanan/{pesanan}/status', [DashboardController::class, 'ubahStatus'])->name('pesanan.ubahStatus');
-    Route::post('/pesanan/{pesanan}/bayar', [DashboardController::class, 'bayar'])->name('pesanan.bayar');
-
-    // Halaman Form Fitur Edit Pesanan
-    Route::get('/pesanan/{pesanan}/edit', [PesananAdminController::class, 'edit'])->name('pesanan.edit');
-    Route::post('/pesanan/{pesanan}', [PesananAdminController::class, 'update'])->name('pesanan.update');
-
-    // Halaman Form Fitur Pembayaran Baru
-    Route::get('/pesanan/{pesanan}/pembayaran', [PembayaranAdminController::class, 'show'])->name('pesanan.pembayaran');
-    Route::post('/pesanan/{pesanan}/pembayaran', [PembayaranAdminController::class, 'submit'])->name('pesanan.bayarFormSubmit');
-
+    
+    Route::get('/pesanan/buat', [DashboardController::class, 'buatPesanan'])->name('pesanan.buat');
 });
+
