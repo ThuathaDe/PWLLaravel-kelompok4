@@ -17,6 +17,7 @@ class Produk extends Model
         'harga',
         'deskripsi',
         'foto_path',
+        'stok',
     ];
 
     public function kategori(): BelongsTo

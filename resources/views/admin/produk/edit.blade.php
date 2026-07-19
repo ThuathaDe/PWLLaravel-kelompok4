@@ -24,22 +24,56 @@
 
         <div>
             <label class="block text-sm font-medium mb-1">Nama Produk</label>
-            <input type="text" name="nama_produk" class="w-full border rounded px-3 py-2" value="{{ old('nama_produk', $produk->nama_produk) }}">
+            <input
+                type="text"
+                name="nama_produk"
+                class="w-full border rounded px-3 py-2"
+                value="{{ old('nama_produk', $produk->nama_produk) }}"
+                required
+            >
         </div>
 
         <div>
             <label class="block text-sm font-medium mb-1">Harga</label>
-            <input type="number" step="0.01" name="harga" class="w-full border rounded px-3 py-2" value="{{ old('harga', $produk->harga) }}">
+            <input
+                type="number"
+                step="0.01"
+                name="harga"
+                class="w-full border rounded px-3 py-2"
+                value="{{ old('harga', $produk->harga) }}"
+                required
+            >
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Stok</label>
+            <input
+                type="number"
+                name="stok"
+                min="0"
+                class="w-full border rounded px-3 py-2"
+                value="{{ old('stok', $produk->stok) }}"
+                required
+            >
         </div>
 
         <div>
             <label class="block text-sm font-medium mb-1">Deskripsi</label>
-            <textarea name="deskripsi" class="w-full border rounded px-3 py-2">{{ old('deskripsi', $produk->deskripsi) }}</textarea>
+            <textarea
+                name="deskripsi"
+                class="w-full border rounded px-3 py-2"
+                rows="4"
+            >{{ old('deskripsi', $produk->deskripsi) }}</textarea>
         </div>
 
         <div>
             <label class="block text-sm font-medium mb-1">Foto (kosongkan jika tidak diganti)</label>
-            <input type="file" name="foto" class="w-full">
+            <input
+                type="file"
+                name="foto"
+                class="w-full"
+                accept="image/*"
+            >
         </div>
 
         @if ($errors->any())
@@ -52,7 +86,15 @@
             </div>
         @endif
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
-        <a href="{{ route('admin.produk.index') }}" class="text-gray-500 ml-2">Batal</a>
+        <div class="flex gap-2">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Update
+            </button>
+
+            <a href="{{ route('admin.produk.index') }}"
+               class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">
+                Batal
+            </a>
+        </div>
     </form>
 @endsection

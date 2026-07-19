@@ -29,6 +29,7 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'nama_produk' => 'required|string|max:255',
             'harga'       => 'required|numeric|min:0',
+            'stok'        => 'required|integer|min:0',
             'deskripsi'   => 'nullable|string',
             'foto'        => 'nullable|image|max:2048',
         ]);
@@ -39,7 +40,9 @@ class ProdukController extends Controller
 
         Produk::create($validated);
 
-        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan');
+        return redirect()
+            ->route('admin.produk.index')
+            ->with('success', 'Produk berhasil ditambahkan');
     }
 
     public function edit(Produk $produk)
@@ -55,6 +58,7 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'nama_produk' => 'required|string|max:255',
             'harga'       => 'required|numeric|min:0',
+            'stok'        => 'required|integer|min:0',
             'deskripsi'   => 'nullable|string',
             'foto'        => 'nullable|image|max:2048',
         ]);
@@ -65,13 +69,17 @@ class ProdukController extends Controller
 
         $produk->update($validated);
 
-        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diperbarui');
+        return redirect()
+            ->route('admin.produk.index')
+            ->with('success', 'Produk berhasil diperbarui');
     }
 
     public function destroy(Produk $produk)
     {
         $produk->delete();
 
-        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus');
+        return redirect()
+            ->route('admin.produk.index')
+            ->with('success', 'Produk berhasil dihapus');
     }
 }

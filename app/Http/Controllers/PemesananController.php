@@ -33,30 +33,35 @@ class PemesananController extends Controller
 
         $pesanan = DB::transaction(function () use ($validated) {
 
-
             $pesanan = Pesanan::create([
-                'meja_id'        => $validated['meja_id'],
-                'tanggal_pesan'  => now(), // otomatis mengisi tanggal & jam saat pesan
-                'status'         => 'pending',
-                'total_harga'    => 0,
+                'meja_id'       => $validated['meja_id'],
+                'tanggal_pesan' => now(),
+                'status'        => 'pending',
+                'total_harga'   => 0,
             ]);
 
             $total = 0;
 
             foreach ($validated['items'] as $item) {
-                $produkId = $item['produk_id'];
-                $jumlah   = $item['jumlah'];
 
-                $produk   = Produk::findOrFail($produkId);
+                $produk = Produk::findOrFail($item['produk_id']);
 
-                $subtotal = $produk->harga * $jumlah;
+                // Cek stok
+                if ($produk->stok < $item['jumlah']) {
+                    throw new \Exception("Stok {$produk->nama_produk} tidak mencukupi.");
+                }
+
+                $subtotal = $produk->harga * $item['jumlah'];
 
                 DetailPesanan::create([
                     'pesanan_id' => $pesanan->id,
                     'produk_id'  => $produk->id,
-                    'jumlah'     => $jumlah,
+                    'jumlah'     => $item['jumlah'],
                     'subtotal'   => $subtotal,
                 ]);
+
+                // Kurangi stok
+                $produk->decrement('stok', $item['jumlah']);
 
                 $total += $subtotal;
             }
@@ -77,7 +82,7 @@ class PemesananController extends Controller
         return redirect()
             ->route('pemesanan.selesai', $pesanan->id)
             ->with('success', 'Pesanan berhasil dikirim!');
-            }
+    }
 
     public function selesai(Pesanan $pesanan)
     {
