@@ -345,3 +345,8 @@ Project ini bertujuan membangun sistem **Self-Ordering Coffee Shop** berbasis we
 **"Satu Repository, Banyak Kontributor, Satu Tujuan."**
 
 </div>
+
+
+LINK REVISI
+
+https://youtu.be/YHoPzIvgwSw?si=O1aweBT0JP_ZVAHh
